@@ -1462,12 +1462,14 @@ const useNFTMarketplaceStore = create((set, get) => ({
             const marketItem = await contract.getMarketItem(tokenId);
             const priceInWei = marketItem.price;
             
-            const ownerOfNFT = await marketItem.owner;
-            if (ownerOfNFT.toLowerCase() == account.toLowerCase()) {
-                toast.error('You can not buy your own NFT that you created');
-                set({ loading: false });
-                return null;
-            }
+            // const ownerOfNFT = await marketItem.owner;
+            // console.log(ownerOfNFT);
+            // console.log(account);
+            // if (ownerOfNFT.toLowerCase() == account.toLowerCase()) {
+            //     toast.error('You can not buy your own NFT that you created');
+            //     set({ loading: false });
+            //     return null;
+            // }
             
             // Execute the purchase transaction
             const tx = await contract.createMarketSale(tokenId, {
@@ -1481,8 +1483,8 @@ const useNFTMarketplaceStore = create((set, get) => ({
             set({ loading: false });
             return tx;
         } catch (error) {
-            console.error('Buy NFT operation failed:', error);
-            toast.error(`Failed to buy NFT: ${error.message || error}`);
+            console.error('Buy NFT operation failed:', error.message);
+            toast.error(`Failed to buy NFT: ${error.reason}`);
             set({ loading: false });
             return null;
         }

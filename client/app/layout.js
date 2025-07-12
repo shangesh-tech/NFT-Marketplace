@@ -15,7 +15,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={`${orbitron.variable} bg-black text-white`}>
+      <body className={`${orbitron.variable} bg-black text-white`} suppressHydrationWarning>
         <Toaster position="top-center" />
         <Navbar/>
         <div className="pt-24 md:pt-16">
